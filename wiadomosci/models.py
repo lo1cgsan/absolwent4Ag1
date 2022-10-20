@@ -15,4 +15,4 @@ class Wiadomosc(models.Model):
         ordering = ['-data_d',]
 
     def __str__(self):
-        return self.tresc[0:50]
+        return self.tresc[0:50] + f" ({self.autor.username})"

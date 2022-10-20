@@ -21,4 +21,4 @@ class Absolwent(models.Model):
         verbose_name_plural = 'absolwenci'
 
     def __str__(self):
-        return self.user.get_full_name() + f"({self.klasa.nazwa} – {self.klasa.rok_matury})"
+        return self.user.get_full_name() + f" ({self.klasa.nazwa} – {self.klasa.rok_matury})"
