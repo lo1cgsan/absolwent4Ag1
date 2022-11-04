@@ -8,8 +8,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse
 
-def index(request):
-    return HttpResponse("<h1>Witaj w Django!</h1>")
+from osoby.models import Absolwent
+
+def lista_absolwentow(request):
+    absolwenci = Absolwent.objects.all()
+    kontekst = {'absolwenci': absolwenci}
+    return render(request, 'osoby/lista_absolwentow.html', kontekst)
 
 def info(request):
     return HttpResponse("<p>Cześć! Tworzymy aplikacje!</p>")
