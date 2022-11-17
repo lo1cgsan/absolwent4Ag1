@@ -10,6 +10,8 @@ from django.urls import reverse
 
 from osoby.models import Absolwent
 
+from django.contrib.auth.forms import UserCreationForm
+
 def lista_absolwentow(request):
     absolwenci = Absolwent.objects.all()
     kontekst = {'absolwenci': absolwenci}
@@ -40,3 +42,14 @@ def wyloguj_osobe(request):
     logout(request)
     messages.info(request, "Zostałeś wylogowany!")
     return redirect(reverse('osoby:lista'))
+
+def rejestruj_osobe(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Utworzono konto! Możesz się zalogować!")
+            return redirect(reverse('osoby:loguj-osobe'))
+    else:
+        form = UserCreationForm()
+    return render(request, 'osoby/rejestruj_osobe1.html', {'form': form})

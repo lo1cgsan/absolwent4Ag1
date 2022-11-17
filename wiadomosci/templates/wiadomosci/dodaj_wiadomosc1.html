@@ -4,11 +4,15 @@
 {% block tresc %}
     <div class="w-100 bg-primary rounded p-4 bg-faded">
         {% if user.is_authenticated %}
+            {% if perms.wiadomosci.add_wiadomosc %}
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-            <button type="submit" class="btn btn-secondary">Wyślij</button>
+                <button type="submit" class="btn btn-primary">Wyślij</button>
             </form>
+            {% else %}
+                <div class="well">Nie możesz dodawać wiadomości!</div>
+            {% endif %}
         {% else %}
             <div class="well">Nie jesteś zalogowany!</div>
         {% endif %}
